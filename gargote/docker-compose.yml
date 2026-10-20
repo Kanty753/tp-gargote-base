@@ -1,0 +1,15 @@
+# Facultatif : lance PostgreSQL dans Docker si vous ne l'avez pas installé.
+#   docker compose up -d
+# Les scripts du dossier database/ sont exécutés au premier démarrage.
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: gargote
+      POSTGRES_PASSWORD: gargote
+      POSTGRES_DB: gargote
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./database/02_donnees.sql:/docker-entrypoint-initdb.d/02_donnees.sql:ro

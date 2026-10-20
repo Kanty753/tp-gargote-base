@@ -1,0 +1,243 @@
+/* =============================================================
+   Gargote — feuille de style unique
+   -------------------------------------------------------------
+   1. Variables (couleurs, polices, espacements)  ← commencez ici
+   2. Base
+   3. En-tête et onglets
+   4. Mise en page
+   5. L’ardoise (la carte des plats)
+   6. Panneaux, formulaires, boutons
+   7. Panier
+   8. Tableaux et ticket
+   9. Messages
+   10. Petits écrans
+   ============================================================= */
+
+/* 1. Variables ------------------------------------------------ */
+:root {
+  --ardoise: #2f3d34;        /* vert ardoise : en-tête et carte */
+  --ardoise-clair: #3d4d43;
+  --craie: #f3f4ef;          /* texte écrit « à la craie » */
+  --moutarde: #e3a72f;       /* couleur d’action (boutons, prix) */
+  --piment: #b23a26;         /* erreurs, suppression */
+  --feuille: #2e7d4f;        /* succès */
+  --fond: #e9ece6;           /* fond de page */
+  --papier: #ffffff;         /* panneaux */
+  --encre: #1e2420;          /* texte principal */
+  --gris: #6b736d;           /* texte secondaire */
+  --trait: #d3d8d0;          /* bordures */
+
+  --police-texte: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --police-titre: Georgia, 'Times New Roman', serif;
+
+  --espace: 1rem;
+  --rayon: 6px;
+}
+
+/* 2. Base ----------------------------------------------------- */
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--police-texte);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--encre);
+  background: var(--fond);
+}
+
+h2 {
+  margin: 0 0 var(--espace);
+  font-family: var(--police-titre);
+  font-size: 1.35rem;
+}
+
+button { font: inherit; cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible, tr:focus-visible {
+  outline: 3px solid var(--moutarde);
+  outline-offset: 2px;
+}
+
+/* 3. En-tête et onglets -------------------------------------- */
+.entete {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--espace);
+  padding: 1.25rem 2rem 0;
+  background: var(--ardoise);
+  color: var(--craie);
+}
+
+.enseigne { display: flex; flex-direction: column; padding-bottom: 0.75rem; }
+.enseigne-nom {
+  font-family: var(--police-titre);
+  font-size: 2.2rem;
+  font-weight: bold;
+  line-height: 1;
+}
+.enseigne-lieu { color: var(--moutarde); font-size: 0.95rem; }
+
+.onglets { display: flex; gap: 0.25rem; }
+.onglet {
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: var(--rayon) var(--rayon) 0 0;
+  background: transparent;
+  color: var(--craie);
+  opacity: 0.75;
+}
+.onglet:hover { opacity: 1; }
+.onglet.actif { background: var(--fond); color: var(--encre); opacity: 1; font-weight: 600; }
+
+/* 4. Mise en page -------------------------------------------- */
+.contenu { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+
+.grille {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+/* 5. L’ardoise ------------------------------------------------ */
+.ardoise {
+  padding: 1.5rem 1.75rem;
+  border: 10px solid #8a6a43;          /* le cadre en bois */
+  border-radius: 4px;
+  background: var(--ardoise);
+  color: var(--craie);
+}
+.ardoise-groupe + .ardoise-groupe { margin-top: 1.5rem; }
+.ardoise-titre {
+  margin: 0 0 0.5rem;
+  font-family: var(--police-titre);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--moutarde);
+}
+.ardoise-liste { list-style: none; margin: 0; padding: 0; }
+.ardoise-ligne {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  padding: 0.3rem 0;
+}
+.plat-pointilles { flex: 1; border-bottom: 2px dotted rgba(243, 244, 239, 0.35); }
+.plat-prix { font-weight: 600; white-space: nowrap; }
+.plat-actions { display: flex; gap: 0.5rem; margin-left: 0.75rem; }
+
+/* Dans l’écran Commande, chaque ligne de l’ardoise est un bouton */
+.ardoise-choix {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: none;
+  border-radius: var(--rayon);
+  background: none;
+  color: inherit;
+  text-align: left;
+}
+.ardoise-choix:hover { background: var(--ardoise-clair); }
+
+.ardoise .vide { color: var(--craie); }
+
+/* 6. Panneaux, formulaires, boutons -------------------------- */
+.panneau {
+  padding: 1.5rem;
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
+  background: var(--papier);
+}
+
+.champ { display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: var(--espace); }
+.champ > span { font-weight: 600; font-size: 0.95rem; }
+.champ input, .champ select {
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
+  font: inherit;
+  background: var(--papier);
+}
+.champ-court input { max-width: 8rem; }
+
+.boutons { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--espace); }
+
+.bouton {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--rayon);
+  background: var(--moutarde);
+  color: var(--encre);
+  font-weight: 600;
+}
+.bouton:hover { filter: brightness(1.05); }
+.bouton:disabled { opacity: 0.5; cursor: wait; }
+.bouton-discret { background: transparent; border: 1px solid var(--trait); }
+
+.lien {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--craie);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  opacity: 0.7;
+}
+.lien:hover { opacity: 1; }
+.lien-danger { color: #f0a493; }
+
+.erreur { color: var(--piment); font-size: 0.85rem; }
+.vide { color: var(--gris); font-style: italic; }
+
+/* 7. Panier --------------------------------------------------- */
+.panier-liste { list-style: none; margin: 0 0 var(--espace); padding: 0; }
+.panier-ligne {
+  display: grid;
+  grid-template-columns: 1fr auto 6.5rem;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--trait);
+}
+.panier-montant { text-align: right; }
+.quantite { display: flex; align-items: center; gap: 0.5rem; }
+.pastille {
+  width: 1.9rem;
+  height: 1.9rem;
+  border: 1px solid var(--trait);
+  border-radius: 50%;
+  background: var(--papier);
+  line-height: 1;
+}
+.panier-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+/* 8. Tableaux et ticket -------------------------------------- */
+.tableau { width: 100%; border-collapse: collapse; }
+.tableau th, .tableau td { padding: 0.5rem; border-bottom: 1px solid var(--trait); text-align: left; }
+.tableau th { font-size: 0.85rem; color: var(--gris); font-weight: 600; }
+.tableau .nombre { text-align: right; white-space: nowrap; }
+.tableau tfoot td { font-weight: 700; border-bottom: none; }
+
+.tableau-cliquable tbody tr { cursor: pointer; }
+.tableau-cliquable tbody tr:hover { background: var(--fond); }
+.tableau-cliquable tr.selectionnee { background: #fbefd2; }
+
+.ticket-info { margin-top: -0.5rem; color: var(--gris); }
+
+/* 9. Messages ------------------------------------------------- */
+.alerte { margin: 0 0 var(--espace); padding: 0.75rem 1rem; border-radius: var(--rayon); }
+.alerte-succes { background: #dcefe2; color: var(--feuille); }
+.alerte-erreur { background: #f6ddd7; color: var(--piment); }
+
+/* 10. Petits écrans ------------------------------------------ */
+@media (max-width: 800px) {
+  .grille { grid-template-columns: 1fr; }
+  .entete, .contenu { padding-left: 1rem; padding-right: 1rem; }
+  .onglets { overflow-x: auto; }
+}
